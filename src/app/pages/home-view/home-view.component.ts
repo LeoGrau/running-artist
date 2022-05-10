@@ -11,11 +11,12 @@ import { OffersApiService } from "../../services/offers-api.service"
 export class HomeViewComponent implements OnInit {
 
   numberOffer: number = 0;
-  collection: Array<Offer> = [];
+  offers: Array<Offer> = [];
   constructor(private serviceOffer: OffersApiService) { }
 
   ngOnInit(): void {
     this.getQuantity();
+    this.getOffers();
   }
 
   getQuantity() {
@@ -23,4 +24,11 @@ export class HomeViewComponent implements OnInit {
       this.numberOffer =  size(response);
     })
   }
+
+  getOffers() {
+    this.serviceOffer.getAll().subscribe((response: any) => {
+      this.offers =  response;
+    })
+  }
+
 }
