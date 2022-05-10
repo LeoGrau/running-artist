@@ -4,23 +4,23 @@
     <mat-card-subtitle> {{ editMode? "Edit offer" : "Add new offer" }} </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <mat-grid-list cols="2" rowHeight="100px">
+    <mat-grid-list cols="2" rowHeight="200px">
       <mat-grid-tile>
         <form (submit)="onSubmit()" #offerForm="ngForm">
           <mat-form-field>
-            <input matInput placeholder="Title" name="title" required [(ngModel)]="offerData.title">
+            <input type="text" maxlength="60" matInput placeholder="Title" name="title" required [(ngModel)]="offerData.title">
           </mat-form-field>
           <mat-form-field>
-            <input matInput placeholder="Description" name="description" required [(ngModel)]="offerData.description">
+            <input type="text" matInput placeholder="Description" name="description" required [(ngModel)]="offerData.description">
           </mat-form-field>
           <mat-form-field>
-            <input matInput placeholder="Points" name="points" required [(ngModel)]="offerData.points">
+            <input type="number" max="100" matInput placeholder="Points" name="points" required [(ngModel)]="offerData.points">
           </mat-form-field>
           <mat-form-field>
             <input matInput placeholder="Bussiness Id" name="content" businessId [(ngModel)]="offerData.businessId">
           </mat-form-field>
           <ng-container *ngIf="editMode; else elseTemplate">
-            <button mat-button color="primary" class="mat-button-text"> Update </button>
+            <button mat-button color="primary" class="mat-button-text"> Save </button>
             <button mat-button color="warn" class="mat-button-text" (click)="cancelEdit()"> Cancel </button>
           </ng-container>
           <ng-template #elseTemplate>
@@ -77,8 +77,4 @@
     </table>
     <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
   </mat-card-content>
-  <mat-card-actions>
-    <a mat-button class="mat-button-text" color="primary"> Add </a>
-    <a mat-button class="mat-button-text" color="primary" (click)="refresh()"> Refresh </a>
-  </mat-card-actions>
 </mat-card>
